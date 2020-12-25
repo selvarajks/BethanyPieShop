@@ -20,7 +20,6 @@ namespace BethanyPieShop
 {
     public class Startup
     {
-
         public IConfiguration Configuration { get; set; }
         public Startup(IConfiguration configuration)
         {
@@ -33,11 +32,11 @@ namespace BethanyPieShop
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+              services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
 
-            services.AddScoped<IPieRepository,PieRepository>();
-            services.AddScoped<ICategoryRepository,CategoryRepository>();
+            services.AddScoped<IPieRepository, PieRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
 
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
@@ -64,9 +63,9 @@ namespace BethanyPieShop
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-            endpoints.MapControllerRoute(
-                name:"default",
-                pattern:"{controller=Home}/{action=index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
